@@ -1,0 +1,12 @@
+Package: sigclass
+Title: Custom signal classifier
+Description: Directed subsampling and supervised classification of signals.
+    Applied to seismic signals.
+Version: 0.1
+Author: Jean-Olivier Irisson <irisson@normalesup.org>, Alexey Sukhovich
+    <alexey.sukhovich@univ-brest.fr>
+Maintainer: Jean-Olivier Irisson <irisson@normalesup.org>
+Depends:
+    R (>= 3.0.2)
+License: GPL-3
+LazyData: true
