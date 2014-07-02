@@ -1,7 +1,7 @@
-Package: sigclass
-Title: Custom signal classifier
+Package: soundclass
+Title: Signal classifier for sounds
 Description: Directed subsampling and supervised classification of signals.
-    Applied to seismic signals.
+    Originally applied to hydrophone records to detect seismic signals.
 Version: 0.1
 Author: Jean-Olivier Irisson <irisson@normalesup.org>, Alexey Sukhovich
     <alexey.sukhovich@univ-brest.fr>
