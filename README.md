@@ -2,7 +2,7 @@
 
 ## Installation
 
-This is an R package. Please install R from <http://cran.rstudio.com/>.
+This is an R package. Please install R (version >= 3.1) from <http://cran.rstudio.com/>.
 
 It is not (yet) in the official R packages repositories. But you can easily install it by typing the following commands in the R console:
 

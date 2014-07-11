@@ -31,7 +31,7 @@ subsample <- function(x, p, k=10) {
 
   # compute the partition
   dist <- dist(scale(x), "euclidian")
-  part <- hclust(dist, method="ward")
+  part <- hclust(dist, method="ward.D")
   x$cluster <- cutree(part, k=k)
 
   # compute the number of element to sample in each partition stratum
