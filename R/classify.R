@@ -1,4 +1,4 @@
-#' Fit a Gradient Boosting Decision Tree model
+#' Fit a Gradient Boosted Decision Tree model
 #' 
 #' @param x a data.frame with signal characteristics in the first columns and signal type (classification) in the last column
 #' @param n.trees see \code{?gbm}
@@ -12,7 +12,7 @@
 #' data(sirena)
 #' head(sirena)
 #' m <- fit.gbdt(x=sirena, n.trees=3, shrinkage=0.01, interaction.depth=1)
-#' # NB: the parameters are caricatural here
+#' # NB: the arguments values are caricatural here
 #' #     for the example to run quickly enough and because the data is easy
 #' print(m)
 #' summary(m)
@@ -90,6 +90,8 @@ summary.gbdt <- function(object, n.trees=object$best.iter, ...) {
 #' data(sirena)
 #' head(sirena)
 #' m <- fit.gbdt(x=sirena, n.trees=3, shrinkage=0.01, interaction.depth=1)
+#' # NB: the arguments values are caricatural here
+#' #     for the example to run quickly enough and because the data is easy
 #' pred <- predict(m, newdata=sirena)
 #' head(pred)
 #'
@@ -109,6 +111,7 @@ predict.gbdt <- function(object, n.trees=object$best.iter, ...) {
   
   return(out)
 }
+
 
 #' Fit GBDT model and predict classification
 #' 
