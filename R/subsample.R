@@ -70,14 +70,14 @@ plot.subsample <- function(x, ...) {
   x <- x[order(x$picked),]
   x$id <- 1:nrow(x)
   # NB: give ids AFTER ordering to get picked signals on top
-  
+
   # reformat the data for facetting
   xm <- melt(x, id.vars=c("id", "cluster", "picked"), variable.name="characteristic")
   xm$characteristic <- as.numeric(xm$characteristic)
-  
+
   # plot
   p <- ggplot(xm) +
-    geom_path(aes(x=characteristic, y=value, group=id, colour=picked)) + 
+    geom_path(aes(x=characteristic, y=value, group=id, colour=picked)) +
     facet_wrap( ~ cluster, scales="free_y") +
     scale_colour_manual("", values=c("grey", "black"), labels=c("all data", "subsample")) +
     scale_x_continuous(breaks=sort(unique(xm$characteristic)), minor_breaks=NULL)
@@ -85,13 +85,13 @@ plot.subsample <- function(x, ...) {
 }
 
 #' Feature-based subsampling of signals from a file
-#' 
+#'
 #' Read a tab or space delimited file containing signal characteristics and subsample a given proportion of signals
 #'
 #' @param file path to a tab or space delimited file containing signal characteristics
 #' @inheritParams subsample
 #' @param plot wether to plot the result of the subsampling
-#' 
+#'
 #' @return
 #' Two files, one for the signals picked in the subsample and one for the non-picked signals
 #'
@@ -105,24 +105,24 @@ subsample_file <- function(file, p, k=10, plot=TRUE) {
     stop("Cannot find file ", file)
   }
   x <- read.table(file)
-  
+
   # subsample and plot the result
   s <- subsample(x, p=p, k=k)
   if ( plot ) {
     pSub <- plot.subsample(s)
     print(pSub)
   }
-  
+
   # save the results to files
   ext <- file_ext(file)
   base <- str_replace(file, str_c("\\.", ext, "$"), "")
 
   picked <- subset(s, subset=s$picked, select=c(-cluster, -picked))
   not_picked <- subset(s, subset=!s$picked, select=c(-cluster, -picked))
-  
+
   write.table(picked,     file=str_c(base, "-subsample.txt"), sep="\t", row.names=FALSE, col.names=FALSE)
   write.table(not_picked, file=str_c(base, "-rest.txt"),      sep="\t", row.names=FALSE, col.names=FALSE)
   if ( plot ) { ggsave(pSub, filename=str_c(base, "-subsample_plot.pdf"), width=8, height=5) }
-  
+
   return(invisible(s))
 }
