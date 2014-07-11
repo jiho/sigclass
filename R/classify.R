@@ -157,7 +157,7 @@ classify_file <- function(data, train, ...) {
   ext <- file_ext(data)
   base <- str_replace(data, str_c("\\.", ext, "$"), "")
   
-  write.table(out,     file=str_c(base, "-predicted.txt"), sep="\t", row.names=FALSE, col.names=FALSE)
+  write.table(out, file=str_c(base, "-classified.txt"), sep="\t", row.names=FALSE, col.names=FALSE)
   # if ( plot ) { ggsave(pSub, filename=str_c(base, "-subsample_plot.pdf"), width=8, height=5) }
 
   return(invisible(out))
