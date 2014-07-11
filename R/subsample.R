@@ -78,9 +78,9 @@ plot.subsample <- function(x, ...) {
 
 #' Feature-based subsampling of signals from a file
 #' 
-#' Read a tab delimited file containing signal characteristics and subsample a given proportion of signals
+#' Read a tab or space delimited file containing signal characteristics and subsample a given proportion of signals
 #'
-#' @param file path to a tab delimited file containing signal characteristics
+#' @param file path to a tab or space delimited file containing signal characteristics
 #' @inheritParams subsample
 #' @param plot wether to plot the result of the subsampling
 #' 
@@ -95,7 +95,7 @@ subsample_file <- function(file, p, k=10, plot=TRUE) {
   if ( ! file.exists(file)) {
     stop("Cannot find file ", file)
   }
-  x <- read.delim(file, header=FALSE)
+  x <- read.table(file)
   
   # subsample and plot the result
   s <- subsample(x, p=p, k=k)

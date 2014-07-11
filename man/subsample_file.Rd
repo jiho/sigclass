@@ -6,7 +6,7 @@
 subsample_file(file, p, k = 10, plot = TRUE)
 }
 \arguments{
-\item{file}{path to a tab delimited file containing signal characteristics}
+\item{file}{path to a tab or space delimited file containing signal characteristics}
 
 \item{plot}{wether to plot the result of the subsampling}
 
@@ -18,6 +18,6 @@ subsample_file(file, p, k = 10, plot = TRUE)
 Two files, one for the signals picked in the subsample and one for the non-picked signals
 }
 \description{
-Read a tab delimited file containing signal characteristics and subsample a given proportion of signals
+Read a tab or space delimited file containing signal characteristics and subsample a given proportion of signals
 }
 
