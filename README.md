@@ -25,7 +25,8 @@ With `soundclass`, this means
     # step 1: subsample 10% of the data
     subsample_file(file="/path/to/data.txt", p=0.1)
     
-    # step 2: open the file "/path/to/data-picked.txt" created above and add identifications in a new column at the end
+    # step 2: open the file "/path/to/data-picked.txt" created above and
+    #         add identifications in a new column at the end
     
     # step 3: classify the data
     classify_file(data="/path/to/data-rest.txt", train="/path/to/data-picked.txt")
