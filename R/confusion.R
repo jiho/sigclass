@@ -51,3 +51,69 @@ confusion_stats <- function(x) {
 
   return(stats)
 }
+
+
+#' Plot the distribution of signals in categories after prediction
+#'
+#' @param true true categories
+#' @param pred predicted categories (last column of the data.frame output by \code{predict.gbdt})
+#' @param prob for each signal, probabilities to be in each category
+#' @param ... passed to \code{geom_??}
+#'
+#' @seealso \code{gbm}, \code{summary.gbm}, \code{predict.gbm} in package \code{gbm}
+#'
+#' @examples
+#' data(sirena)
+#' sub <- subsample(sirena[,-ncol(sirena)], p=0.2)
+#' train <- sirena[sub$picked,]
+#' data <- sirena[!sub$picked,]
+#' p <- classify(data=data[,-ncol(data)], train=train, n.trees=100, shrinkage=0.01, n.minobsinnode=1)
+#' confusion_proba_plot(true=data$type, pred=p$type, prob=p[,1:4])
+#'
+#' @importFrom plyr ddply
+#' @importFrom reshape2 melt
+#' @importFrom ggplot2 ggplot geom_point geom_line facet_wrap scale_alpha_manual scale_shape_manual labs
+#' @export
+confusion_proba_plot <- function(true, pred, prob) {
+
+  # checks
+  categoriesInTrue <- sort(unique(true))
+  categoriesInPred <- sort(unique(pred))
+
+  if ( ! all(categoriesInPred %in% categoriesInTrue) ) {
+    warning("Some categories in `true` were never predicted")
+  }
+  if ( ! all(categoriesInTrue %in% categoriesInPred) ) {
+    stop("`pred` has more categories than `true`")
+  }
+
+  categories <- union(categoriesInTrue, categoriesInPred)
+  if ( ! setequal(names(prob), categories) ) {
+    stop("Categories and probabilities columns do not match")
+  }
+
+  # assemble all data
+  d <- data.frame(prob, true, pred, stringsAsFactors=FALSE)
+  d$id <- 1:nrow(d)
+
+  # order by proba of being of the correct type (cleaner plot)
+  d <- ddply(d, ~true, function(x) {
+    cType <- x$true[1]
+    x$rank <- nrow(x) - rank(x[,cType], ties.method="random")
+    x$perc <- x$rank / max(x$rank) * 100  # relative rank
+    return(x)
+  })
+
+  # melt data for plotting
+  dm <- melt(d, id.vars=c("id", "true", "pred", "rank", "perc"), variable.name="category", value.name="proba")
+
+  p <- ggplot(dm, aes(x=perc, y=proba, colour=category, )) +
+    geom_line(alpha=0.5) +
+    geom_point(aes(alpha=category==pred, shape=true==pred)) +
+    facet_wrap(~true) +
+    scale_alpha_manual(values=c(0.5, 1), guide="none") +
+    scale_shape_manual(values=c(4, 16), guide="none") +
+    labs(x="Percentage rank", y="Probability", colour="Category", title="Within each true category (panels), probability for each signal to be in each category\n(wrong predictions are highlighted)")
+
+  return(p)
+}
