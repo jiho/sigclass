@@ -35,6 +35,9 @@ subsample <- function(x, p, k=10) {
   # compute the number of element to sample in each partition stratum
   n <- round(nrow(x) * p / k)
 
+  # add original line number, to return the result in the same order as the original
+  x$lineno <- 1:nrow(x)
+
   # extract n element in each stratum
   picks <- ddply(x, ~ cluster, function(X, n) {
     idx <- sample.int(nrow(X), min(n, nrow(X)))
@@ -42,6 +45,9 @@ subsample <- function(x, p, k=10) {
     X$picked[idx] <- TRUE
     return(X)
   }, n=n)
+  # reorder the picked data as the original
+  picks <- picks[order(picks$lineno),]
+  picks <- picks[,!names(picks) %in% "lineno"]
 
   class(picks) <- c("subsample", "data.frame")
 
