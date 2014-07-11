@@ -147,6 +147,8 @@ classify <- function(data, train, ...) {
   }
   
   m <- fit.gbdt(x=train, ...)
+  print(m)
+  print(summary(m))
   
   pred <- predict(m, newdata=data)
   
