@@ -10,7 +10,9 @@
 #' A data.frame containing picked and not-picked signals
 #'
 #' @seealso \code{\link{plot.subsample}}, \code{\link{subsample_file}}
+#'
 #' @importFrom plyr ddply
+#' @export
 subsample <- function(x, p, k=10) {
 
   # check arguments
@@ -60,9 +62,10 @@ subsample <- function(x, p, k=10) {
 #' @param ... passed to and from other methods
 #'
 #' @seealso \code{\link{subsample}}
-#' @export
+#'
 #' @importFrom reshape2 melt
 #' @importFrom ggplot2 ggplot geom_path aes facet_wrap scale_colour_manual scale_x_continuous
+#' @export
 plot.subsample <- function(x, ...) {
   x <- x[order(x$picked),]
   x$id <- 1:nrow(x)
@@ -95,6 +98,7 @@ plot.subsample <- function(x, ...) {
 #' @importFrom stringr str_c str_replace
 #' @importFrom ggplot2 ggsave
 #' @importFrom tools file_ext
+#' @export
 subsample_file <- function(file, p, k=10, plot=TRUE) {
   # read file
   if ( ! file.exists(file)) {
