@@ -22,7 +22,9 @@ Fit a Gradient Boosting Decision Tree model
 \examples{
 data(sirena)
 head(sirena)
-m <- fit.gbdt(x=sirena, n.trees=100, shrinkage=0.01)
+m <- fit.gbdt(x=sirena, n.trees=3, shrinkage=0.01, interaction.depth=1)
+# NB: the parameters are caricatural here
+#     for the example to run quickly enough and because the data is easy
 print(m)
 summary(m)
 pred <- predict(m, newdata=sirena)

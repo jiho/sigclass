@@ -18,7 +18,7 @@ Predict classifications from a Gradient Boosting Decision Tree model
 \examples{
 data(sirena)
 head(sirena)
-m <- fit.gbdt(x=sirena, n.trees=500)
+m <- fit.gbdt(x=sirena, n.trees=3, shrinkage=0.01, interaction.depth=1)
 pred <- predict(m, newdata=sirena)
 head(pred)
 }
