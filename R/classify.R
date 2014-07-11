@@ -18,7 +18,8 @@
 #' summary(m)
 #' pred <- predict(m, newdata=sirena)
 #' head(pred)
-#' table(true=sirena$type, predicted=pred$type)
+#' (cm <- confusion_matrix(true=sirena$type, pred=pred$type))
+#' confusion_stats(cm)
 #'
 #' @importFrom stringr str_c
 #' @import gbm
@@ -96,10 +97,11 @@ predict.gbdt <- function(object, n.trees=object$best.iter, ...) {
 #' data(sirena)
 #' sub <- subsample(sirena[,-ncol(sirena)], p=0.2)
 #' train <- sirena[sub$picked,]
-#' data  <- sirena[!sub$picked,]
+#' data <- sirena[!sub$picked,]
 #' pred <- classify(data=data[,-ncol(data)], train=train, n.trees=100, shrinkage=0.01, n.minobsinnode=1)
 #' head(pred)
-#' table(true=data$type, prediction=pred$type)
+#' (cm <- confusion_matrix(true=data$type, pred=pred$type))
+#' confusion_stats(cm)
 #'
 #' @export
 classify <- function(data, train, ...) {

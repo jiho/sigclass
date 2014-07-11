@@ -29,7 +29,8 @@ print(m)
 summary(m)
 pred <- predict(m, newdata=sirena)
 head(pred)
-table(true=sirena$type, predicted=pred$type)
+(cm <- confusion_matrix(true=sirena$type, pred=pred$type))
+confusion_stats(cm)
 }
 \seealso{
 \code{gbm}, \code{summary.gbm}, \code{predict.gbm} in package \code{gbm}
