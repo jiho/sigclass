@@ -2,6 +2,7 @@
 
 S3method(plot,subsample)
 S3method(predict,gbdt)
+S3method(summary,gbdt)
 export(classify)
 export(classify_file)
 export(confusion_matrix)

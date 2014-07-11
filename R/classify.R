@@ -55,6 +55,29 @@ fit.gbdt <- function(x, n.trees=5000, shrinkage=0.001, interaction.depth=3, ...)
   return(m)
 }
 
+
+#' Compute the relative influence of each variable in the model
+#'
+#' @param object a gbdt object, from fit.gbdt
+#' @param n.trees number of trees used in the computation.
+#' @param ... passed to \code{summary.gbm}
+#'
+#' @seealso \code{summary.gbm} in package \code{gbm}
+#'
+#' @examples
+#' data(sirena)
+#' m <- fit.gbdt(x=sirena, n.trees=3, shrinkage=0.01, interaction.depth=1)
+#' # NB: the arguments values are caricatural here
+#' #     for the example to run quickly enough and because the data is easy
+#' summary(m)
+#'
+#' @import gbm
+#' @export
+summary.gbdt <- function(object, n.trees=object$best.iter, ...) {
+  summary.gbm(object, plotit=FALSE, n.trees=n.trees, ...)
+}
+
+
 #' Predict classifications from a Gradient Boosting Decision Tree model
 #' 
 #' @param object a gbdt object, from fit.gbdt
