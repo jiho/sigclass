@@ -118,6 +118,7 @@ predict.gbdt <- function(object, n.trees=object$best.iter, ...) {
 #' 
 #' @param data a data.frame with signal characteristics of signals to be predicted
 #' @param train a data.frame with signal characteristics and classification of signals from which to learn the model
+#' @param verbose when TRUE (the default), print information about the fitted model
 #' @param ... passed to \code{fit.gbdt}
 #'
 #' @examples
@@ -131,7 +132,7 @@ predict.gbdt <- function(object, n.trees=object$best.iter, ...) {
 #' confusion_stats(cm)
 #'
 #' @export
-classify <- function(data, train, ...) {
+classify <- function(data, train, verbose=TRUE, ...) {
   # check arguments existence
   if ( missing(data) ) {
     stop("Need to provide a dataset in data")
@@ -146,11 +147,17 @@ classify <- function(data, train, ...) {
   if ( ! all(c(varsTrain %in% varsData, varsData %in% varsTrain)) ) {
     stop("Columns mismatch between training set and data")
   }
-  
+
+  # fit the model
   m <- fit.gbdt(x=train, ...)
-  print(m)
-  print(summary(m))
   
+  # give feedback about the model
+  if ( verbose ) {
+    print(m)
+    print(summary(m))
+  }
+
+  # predict classes
   pred <- predict(m, newdata=data)
   
   return(pred)

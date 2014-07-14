@@ -3,12 +3,14 @@
 \alias{classify}
 \title{Fit GBDT model and predict classification}
 \usage{
-classify(data, train, ...)
+classify(data, train, verbose = TRUE, ...)
 }
 \arguments{
 \item{data}{a data.frame with signal characteristics of signals to be predicted}
 
 \item{train}{a data.frame with signal characteristics and classification of signals from which to learn the model}
+
+\item{verbose}{when TRUE (the default), print information about the fitted model}
 
 \item{...}{passed to \code{fit.gbdt}}
 }
