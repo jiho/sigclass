@@ -4,6 +4,7 @@
 #' @param n.trees see \code{?gbm}
 #' @param shrinkage see \code{?gbm}
 #' @param interaction.depth see \code{?gbm}
+#' @param cv.folds see \code{?gbm}
 #' @param ... passed to \code{gbm}
 #'
 #' @seealso \code{gbm}, \code{summary.gbm}, \code{predict.gbm} in package \code{gbm}
@@ -24,7 +25,7 @@
 #' @importFrom stringr str_c
 #' @import gbm
 #' @export
-fit.gbdt <- function(x, n.trees=5000, shrinkage=0.001, interaction.depth=3, ...) {
+fit.gbdt <- function(x, n.trees=5000, shrinkage=0.001, interaction.depth=3, cv.folds=5, ...) {
 
   # prepare model formula
   type <- names(x)[ncol(x)]
@@ -40,7 +41,7 @@ fit.gbdt <- function(x, n.trees=5000, shrinkage=0.001, interaction.depth=3, ...)
     distribution="multinomial",
     n.trees=n.trees,      # should be > 1000 to be robust
     shrinkage=shrinkage,  # should be small to allow enough trees
-    cv.folds=5,           # allows estimating error in prediction and then use gbm.perf with method cv to find optimal n.trees
+    cv.folds=cv.folds,           # allows estimating error in prediction and then use gbm.perf with method cv to find optimal n.trees
     interaction.depth=interaction.depth,  
                           # higher level interactions means faster fit => decrease shrink/learning rate to compensate
     ...

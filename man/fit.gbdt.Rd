@@ -3,7 +3,8 @@
 \alias{fit.gbdt}
 \title{Fit a Gradient Boosted Decision Tree model}
 \usage{
-fit.gbdt(x, n.trees = 5000, shrinkage = 0.001, interaction.depth = 3, ...)
+fit.gbdt(x, n.trees = 5000, shrinkage = 0.001, interaction.depth = 3,
+  cv.folds = 5, ...)
 }
 \arguments{
 \item{x}{a data.frame with signal characteristics in the first columns and signal type (classification) in the last column}
@@ -13,6 +14,8 @@ fit.gbdt(x, n.trees = 5000, shrinkage = 0.001, interaction.depth = 3, ...)
 \item{shrinkage}{see \code{?gbm}}
 
 \item{interaction.depth}{see \code{?gbm}}
+
+\item{cv.folds}{see \code{?gbm}}
 
 \item{...}{passed to \code{gbm}}
 }
