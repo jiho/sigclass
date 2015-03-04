@@ -182,6 +182,9 @@ classify <- function(data, train, verbose=TRUE, ...) {
 #' @param train a tab or space delimited file with signal characteristics and classification of signals from which to learn the model
 #' @param ... passed to \code{fit.gbdt}
 #'
+#' @details
+#' Usually the \code{data} and \code{train} files are created by running \code{\link{subsample_file}} on a file with the characteristics of many signals to perform feature-based subsampling of signals and then identifying manually the signals in the train part.
+#'
 #' @return
 #' A file with the original data and the predictions (probabilities and predicted type)
 #' 

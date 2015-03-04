@@ -18,6 +18,9 @@ A file with the original data and the predictions (probabilities and predicted t
 \description{
 Fit GBDT model and predict classification
 }
+\details{
+Usually the \code{data} and \code{train} files are created by running \code{\link{subsample_file}} on a file with the characteristics of many signals to perform feature-based subsampling of signals and then identifying manually the signals in the train part.
+}
 \seealso{
 \code{\link{classify}} for an example of usage
 }
