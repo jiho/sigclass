@@ -8,16 +8,31 @@ subsample_file(file, p, k = 10, plot = TRUE)
 \arguments{
 \item{file}{path to a tab or space delimited file containing signal characteristics}
 
-\item{plot}{wether to plot the result of the subsampling}
-
 \item{p}{proportion of the total number of signals to subsample, between 0 and 1}
 
 \item{k}{number of groups}
+
+\item{plot}{wether to plot the result of the subsampling}
 }
 \value{
 Two files, one for the signals picked in the subsample and one for the non-picked signals
 }
 \description{
 Read a tab or space delimited file containing signal characteristics and subsample a given proportion of signals
+}
+\examples{
+# get an example file from within the package
+data_file <- system.file("sirena.txt", package="soundclass")
+# check what it looks like
+file.show(data_file)
+# copy it to a temporary directory in which we can work
+tmp <- tempdir()
+file.copy(data_file, tmp)
+# perform feature based subsampling on this file and show the results
+subsample_file(paste0(tmp, "/sirena.txt"), p=0.2)
+list.files(tmp)
+}
+\seealso{
+\code{\link{subsample}}
 }
 

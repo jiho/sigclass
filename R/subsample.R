@@ -11,6 +11,17 @@
 #'
 #' @seealso \code{\link{plot.subsample}}, \code{\link{subsample_file}}
 #'
+#' @examples
+#' data(sirena)
+#' head(sirena)
+#' # The data contains:
+#' # - signals as lines
+#' # - signals features (V1->V8) and type as columns
+#' # To take a feature-based subsample of signals, we need to remove
+#' # the last column (i.e. the signal type)
+#' sub <- subsample(sirena[,-ncol(sirena)], p=0.2)
+#' head(sub)
+#'
 #' @importFrom plyr ddply
 #' @export
 subsample <- function(x, p, k=10) {
@@ -94,6 +105,20 @@ plot.subsample <- function(x, ...) {
 #'
 #' @return
 #' Two files, one for the signals picked in the subsample and one for the non-picked signals
+#'
+#' @seealso \code{\link{subsample}}
+#'
+#' @examples
+#' # get an example file from within the package
+#' data_file <- system.file("sirena.txt", package="soundclass")
+#' # check what it looks like
+#' file.show(data_file)
+#' # copy it to a temporary directory in which we can work
+#' tmp <- tempdir()
+#' file.copy(data_file, tmp)
+#' # perform feature based subsampling on this file and show the results
+#' subsample_file(paste0(tmp, "/sirena.txt"), p=0.2)
+#' list.files(tmp)
 #'
 #' @importFrom stringr str_c str_replace
 #' @importFrom ggplot2 ggsave

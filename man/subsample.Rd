@@ -18,6 +18,17 @@ A data.frame containing picked and not-picked signals
 \description{
 Perform a partition of signals based on their characteristics and pick signals homogeneously across groups. This increases the probability of picking rare and different signals, which means that signals in the subsample are more representative of all signal types in the original data.
 }
+\examples{
+data(sirena)
+head(sirena)
+# The data contains:
+# - signals as lines
+# - signals features (V1->V8) and type as columns
+# To take a feature-based subsample of signals, we need to remove
+# the last column (i.e. the signal type)
+sub <- subsample(sirena[,-ncol(sirena)], p=0.2)
+head(sub)
+}
 \seealso{
 \code{\link{plot.subsample}}, \code{\link{subsample_file}}
 }
