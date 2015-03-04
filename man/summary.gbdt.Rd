@@ -17,9 +17,12 @@ Compute the relative influence of each variable in the model
 }
 \examples{
 data(sirena)
-m <- fit.gbdt(x=sirena, n.trees=3, shrinkage=0.01, interaction.depth=1)
-# NB: the arguments values are caricatural here
-#     for the example to run quickly enough and because the data is easy
+m <- fit.gbdt(x=sirena, n.trees=3, shrinkage=0.01, interaction.depth=1,
+              n.cores=1)
+# NB: The arguments values are caricatural here for the example to run
+#     quickly enough and because the data is easy.
+# NB: n.cores = 1 is necessary for examples to run on all machines. Feel
+#     free to remove it and use more cores on your machine.
 summary(m)
 }
 \seealso{

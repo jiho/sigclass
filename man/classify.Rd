@@ -22,7 +22,11 @@ data(sirena)
 sub <- subsample(sirena[,-ncol(sirena)], p=0.2)
 train <- sirena[sub$picked,]
 data <- sirena[!sub$picked,]
-pred <- classify(data=data[,-ncol(data)], train=train, n.trees=100, shrinkage=0.01, n.minobsinnode=1)
+pred <- classify(data=data[,-ncol(data)], train=train,
+                 n.trees=100, shrinkage=0.01, n.minobsinnode=1,
+                 n.cores=1)
+# NB: n.cores = 1 is necessary for examples to run on all machines. Feel
+#     free to remove it and use more cores on your machine.
 head(pred)
 (cm <- confusion_matrix(true=data$type, pred=pred$type))
 confusion_stats(cm)

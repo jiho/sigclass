@@ -12,9 +12,12 @@
 #' @examples
 #' data(sirena)
 #' head(sirena)
-#' m <- fit.gbdt(x=sirena, n.trees=3, shrinkage=0.01, interaction.depth=1)
-#' # NB: the arguments values are caricatural here
-#' #     for the example to run quickly enough and because the data is easy
+#' m <- fit.gbdt(x=sirena, n.trees=3, shrinkage=0.01, interaction.depth=1,
+#'               n.cores=1)
+#' # NB: The arguments values are caricatural here for the example to run
+#' #     quickly enough and because the data is easy.
+#' # NB: n.cores = 1 is necessary for examples to run on all machines. Feel
+#' #     free to remove it and use more cores on your machine.
 #' print(m)
 #' summary(m)
 #' pred <- predict(m, newdata=sirena)
@@ -67,9 +70,12 @@ fit.gbdt <- function(x, n.trees=5000, shrinkage=0.001, interaction.depth=3, cv.f
 #'
 #' @examples
 #' data(sirena)
-#' m <- fit.gbdt(x=sirena, n.trees=3, shrinkage=0.01, interaction.depth=1)
-#' # NB: the arguments values are caricatural here
-#' #     for the example to run quickly enough and because the data is easy
+#' m <- fit.gbdt(x=sirena, n.trees=3, shrinkage=0.01, interaction.depth=1,
+#'               n.cores=1)
+#' # NB: The arguments values are caricatural here for the example to run
+#' #     quickly enough and because the data is easy.
+#' # NB: n.cores = 1 is necessary for examples to run on all machines. Feel
+#' #     free to remove it and use more cores on your machine.
 #' summary(m)
 #'
 #' @import gbm
@@ -90,9 +96,12 @@ summary.gbdt <- function(object, n.trees=object$best.iter, ...) {
 #' @examples
 #' data(sirena)
 #' head(sirena)
-#' m <- fit.gbdt(x=sirena, n.trees=3, shrinkage=0.01, interaction.depth=1)
-#' # NB: the arguments values are caricatural here
-#' #     for the example to run quickly enough and because the data is easy
+#' m <- fit.gbdt(x=sirena, n.trees=3, shrinkage=0.01, interaction.depth=1,
+#'               n.cores=1)
+#' # NB: The arguments values are caricatural here for the example to run
+#' #     quickly enough and because the data is easy.
+#' # NB: n.cores = 1 is necessary for examples to run on all machines. Feel
+#' #     free to remove it and use more cores on your machine.
 #' pred <- predict(m, newdata=sirena)
 #' head(pred)
 #'
@@ -126,7 +135,11 @@ predict.gbdt <- function(object, n.trees=object$best.iter, ...) {
 #' sub <- subsample(sirena[,-ncol(sirena)], p=0.2)
 #' train <- sirena[sub$picked,]
 #' data <- sirena[!sub$picked,]
-#' pred <- classify(data=data[,-ncol(data)], train=train, n.trees=100, shrinkage=0.01, n.minobsinnode=1)
+#' pred <- classify(data=data[,-ncol(data)], train=train,
+#'                  n.trees=100, shrinkage=0.01, n.minobsinnode=1,
+#'                  n.cores=1)
+#' # NB: n.cores = 1 is necessary for examples to run on all machines. Feel
+#' #     free to remove it and use more cores on your machine.
 #' head(pred)
 #' (cm <- confusion_matrix(true=data$type, pred=pred$type))
 #' confusion_stats(cm)

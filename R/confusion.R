@@ -67,7 +67,9 @@ confusion_stats <- function(x) {
 #' sub <- subsample(sirena[,-ncol(sirena)], p=0.2)
 #' train <- sirena[sub$picked,]
 #' data <- sirena[!sub$picked,]
-#' p <- classify(data=data[,-ncol(data)], train=train, n.trees=100, shrinkage=0.01, n.minobsinnode=1)
+#' p <- classify(data=data[,-ncol(data)], train=train,
+#'               n.trees=100, shrinkage=0.01, n.minobsinnode=1,
+#'               n.cores=1)
 #' confusion_proba_plot(true=data$type, pred=p$type, prob=p[,1:4])
 #'
 #' @importFrom plyr ddply
