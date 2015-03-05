@@ -22,15 +22,21 @@ With `soundclass`, this means
     # load the package
     library("soundclass")
     
-    # step 1: subsample 10% of the data
+    # step 1: 
+    # Subsample 10% of the data
     subsample_file(file="/path/to/data.txt", p=0.1)
     
-    # step 2: open the file "/path/to/data-picked.txt" created above and
-    #         add identifications in a new column at the end
+    # step 2: 
+    # Open the file "/path/to/data-picked.txt" created above and
+    # add identifications in a new column at the end.
+    # Identification labels can be letters, numbers, full words, etc.
+    # are case sensitive, and should probably not contain special characters.
+    # The labels will be converted in an R factor (see factor() for details)
     
-    # step 3: classify the data
+    # step 3:
+    # Classify the data (see ?fit.gbdt and ?gbm for more details on settings)
     classify_file(data="/path/to/data-rest.txt", train="/path/to/data-picked.txt")
-    # look at the new /path/to/data-rest-classified.txt file just created
+    # Look at the new /path/to/data-rest-classified.txt file just created
 
 Instead of working with files, you can also work in a more usual manner in R (i.e. with data.frames) with the functions `subsample` and `classify`. The various steps (fitting the model, predicting from the model, looking at the results, etc.) can also be decomposed. Look at
 
