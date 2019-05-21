@@ -41,9 +41,9 @@ subsample <- function(x, p, k=10) {
   }
 
   # compute the partition
-  dist <- dist(scale(x), "euclidian")
-  part <- hclust(dist, method="ward.D")
-  x$cluster <- cutree(part, k=k)
+  dist <- stats::dist(scale(x), "euclidian")
+  part <- stats::hclust(dist, method="ward.D")
+  x$cluster <- stats::cutree(part, k=k)
 
   # compute the number of element to sample in each partition stratum
   n <- round(nrow(x) * p / k)
@@ -129,7 +129,7 @@ subsample_file <- function(file, p, k=10, plot=TRUE) {
   if ( ! file.exists(file)) {
     stop("Cannot find file ", file)
   }
-  x <- read.table(file)
+  x <- utils::read.table(file)
 
   # subsample and plot the result
   s <- subsample(x, p=p, k=k)
@@ -145,8 +145,8 @@ subsample_file <- function(file, p, k=10, plot=TRUE) {
   picked <- subset(s, subset=s$picked, select=c(-cluster, -picked))
   not_picked <- subset(s, subset=!s$picked, select=c(-cluster, -picked))
 
-  write.table(picked,     file=str_c(base, "-subsample.txt"), sep="\t", row.names=FALSE, col.names=FALSE)
-  write.table(not_picked, file=str_c(base, "-rest.txt"),      sep="\t", row.names=FALSE, col.names=FALSE)
+  utils::write.table(picked,     file=str_c(base, "-subsample.txt"), sep="\t", row.names=FALSE, col.names=FALSE)
+  # utils::write.table(not_picked, file=str_c(base, "-rest.txt"),      sep="\t", row.names=FALSE, col.names=FALSE)
   if ( plot ) { ggsave(pSub, filename=str_c(base, "-subsample_plot.pdf"), width=8, height=5) }
 
   return(invisible(s))

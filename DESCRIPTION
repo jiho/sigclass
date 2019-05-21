@@ -16,4 +16,6 @@ Imports:
     ggplot2,
     reshape2,
     stringr,
-    tools
+    tools,
+    utils,
+    stats

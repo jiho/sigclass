@@ -74,7 +74,7 @@ confusion_stats <- function(x) {
 #'
 #' @importFrom plyr ddply
 #' @importFrom reshape2 melt
-#' @importFrom ggplot2 ggplot geom_point geom_line facet_wrap scale_alpha_manual scale_shape_manual labs
+#' @importFrom ggplot2 ggplot geom_point geom_line facet_wrap scale_alpha_manual scale_shape_manual labs aes
 #' @export
 confusion_proba_plot <- function(true, pred, prob) {
 
@@ -109,7 +109,7 @@ confusion_proba_plot <- function(true, pred, prob) {
   # melt data for plotting
   dm <- melt(d, id.vars=c("id", "true", "pred", "rank", "perc"), variable.name="category", value.name="proba")
 
-  p <- ggplot(dm, aes(x=perc, y=proba, colour=category, )) +
+  p <- ggplot(dm, aes(x=perc, y=proba, colour=category)) +
     geom_line(alpha=0.5) +
     geom_point(aes(alpha=category==pred, shape=true==pred)) +
     facet_wrap(~true) +
