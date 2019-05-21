@@ -7,7 +7,7 @@ This is an R package. Please install R (version >= 3.1) from <http://cran.rstudi
 It is not (yet) in the official R packages repositories. But you can easily install it by typing the following commands in the R console:
 
     install.packages("devtools")
-    devtools::install_github("soundclass", "jiho")
+    devtools::install_github("jiho/soundclass")
 
 ## Usage
 
